@@ -15,7 +15,7 @@ RPC_CHECK = defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             'bitmarkaddress' in (yield bitcoind.rpc_help()) and
             not (yield bitcoind.rpc_getinfo())['testnet']
         ))
-SUBSIDY_FUNC = lambda height: 20*100000000
+SUBSIDY_FUNC = lambda height: (10*100000000>>((height+1)/788000))+(10*100000000>>(((height+1)+788000)/788000))
 POW_FUNC = lambda data: pack.IntType(256).unpack(__import__('ltc_scrypt').getPoWHash(data))
 BLOCK_PERIOD = 120 # s
 SYMBOL = 'BTM'
